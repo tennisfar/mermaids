@@ -41,16 +41,17 @@ subgraph flow[Oprettelsesflow]
 LogInMitID[Log ind med MitID]
 
 DS ==> |Opret konto| 20304
-20304 --> |Afbryd| 20305
+20304 <--> |Afbryd| 20305
 20305 --> |Ja, annuller og luk| DS
-20305 --> |Nej, opret ny konto| 20304
-20306 -.-> |Tilbage| 20304
+
+20306 -.-> 20304
 20304 ==> |Kom i gang| 20306
 
 20306 ==> |Fortsæt| ValidateEmail[(Validér email i PAM)]
 ValidateEmail ==> |Email findes ikke i PAM| 20308
 ValidateEmail --> |Email findes i PAM| 20307
 
+20306 <--> |Afbryd| 20305
 
 20307 -.-> |Tilbage| 20306
 20307 --> |Log ind med MitID| LogInMitID --> DS
