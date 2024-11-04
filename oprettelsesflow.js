@@ -59,22 +59,28 @@ ValidateEmail --> |Email findes i PAM| 20307
 
 20308 ==> |Fortsæt| 20309
 20308 -.-> |Tilbage| 20306
+20308 <--> |Afbryd| 20305
 
 20309 ==> |Opret login| 20310
 20309 -.-> |Tilbage| 20308
+20309 <--> |Afbryd| 20305
 
 20310 ==> |Sæt grænse| 20311
 20310 -.-> |Tilbage| 20309
+20310 <--> |Afbryd| 20305
 
 20311 ==> |Accepter| 20312
 20311 -.-> |Tilbage| 20310
+20311 <--> |Afbryd| 20305
 
 20312 ==> |Ja tak| 20314
 20312 -.-> |Tilbage| 20311
+20312 <--> |Afbryd| 20305
 
 20312 ==> |Nej tak| 20314
 
 20314 ==> |Log ind med MitID| ValidateMitID[(Validér MitID)]
+20314 <--> |Afbryd| 20305
 
 ValidateMitID --> |Bruger findes i DS| 20315
 ValidateMitID --> |Bruger findes ikke i DS| 20316
