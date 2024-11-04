@@ -5,8 +5,8 @@ const mermaid = document.querySelector(".mermaid");
 mermaid.innerHTML = `
 flowchart TB
 
-style DsOddset fill:#0D50A0
-style DsLotto fill:#c50004
+style DLI fill:#0D50A0
+style DLO fill:#c50004
 style ResetPassword fill:#f00
 style 20313 fill:#f00
 style 20317 fill:#f00
@@ -92,8 +92,8 @@ ValidateMitID --> |Bruger findes ikke i DS| 20316
 end
 
 subgraph DS
-DsOddset[Oddset]
-DsLotto[Lotto]
+DLI[DLI brand]
+DLO[DLO brand]
 end
 
 
