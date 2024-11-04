@@ -1,0 +1,69 @@
+body {
+    font-family: "Roboto";
+    font-size: 14px;
+    padding: 30px;
+  }
+  
+  .mermaid * {
+    font-family: "Roboto" !important;
+  }
+  
+  .mermaid .cluster {
+    rect {
+      fill: #fffff0;
+      stroke: black !important;
+    }
+  
+    .nodeLabel {
+      color: black !important;
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+  
+  .mermaid polygon + g .nodeLabel {
+    color: black !important;
+  }
+  
+  .mermaid .edgeLabel {
+    background-color: #d7e0ff !important;
+  }
+  
+  .mermaid .node polygon {
+    fill: #d7e0ff !important;
+    stroke: #d7e0ff !important;
+  
+    + g .nodeLabel {
+      color: black !important;
+    }
+  }
+  
+  .mermaid .node rect {
+    fill: #62bd93 !important;
+    stroke: #62bd93 !important;
+  
+    + g .nodeLabel {
+      color: white !important;
+    }
+  }
+  
+  .mermaid .edgeLabel {
+    background-color: #ffffff;
+    text-align: left;
+    opacity: 1 !important;
+  }
+  .mermaid .label {
+    padding: 1rem 0.25rem !important;
+  }
+  
+  foreignObject > div,
+  circle {
+    padding: -10% 0 !important;
+  }
+  
+  svg {
+    overflow: auto !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
