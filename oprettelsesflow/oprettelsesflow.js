@@ -24,6 +24,17 @@ subgraph missing3[Mangler i flow]
 ResetPassword[Nulstil adgangskode]
 end
 
+subgraph DS[Danske Spil side]
+DLI[DLI brand]
+DLO[DLO brand]
+end
+
+subgraph reciept[Kvittering]
+20315 --> |Gå til Brand| DS
+20315 --> |Nulstil adgangskode| ResetPassword
+20316 ==> DS
+end
+
 subgraph flow[Oprettelsesflow]
 
 20304[IU-20304: Start oprettelse]
@@ -84,17 +95,8 @@ ValidateEmail --> |Email findes i PAM| 20307
 
 ValidateMitID --> |Bruger findes i DS| 20315
 ValidateMitID --> |Bruger findes ikke i DS| 20316
-
-20315 --> |Gå til Brand| DS
-20315 --> |Nulstil adgangskode| ResetPassword
-
-20316 ==> DS
 end
 
-subgraph DS
-DLI[DLI brand]
-DLO[DLO brand]
-end
 
 
 `;
