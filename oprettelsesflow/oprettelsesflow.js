@@ -5,11 +5,13 @@ const mermaid = document.querySelector(".mermaid");
 mermaid.innerHTML = `
 flowchart TB
 
-style DLI fill:#0D50A0
-style DLO fill:#c50004
+
 style 20313 fill:#f00
 style 20317 fill:#f00
 
+subgraph DliOrDloSlut[DLI eller DLO side]
+  DsSlut[Slut]
+end
 
 subgraph missing1[Mangler i flow]
   20313[IU-20313: Vinderbeskeder]
@@ -23,24 +25,25 @@ subgraph resetPassword[Eksisterende side]
   ResetPassword[Nulstil adgangskode]
 end
 
-subgraph DanskeSpilSide[Danske Spil side]
-  DLI[DLI brand]
-  DLO[DLO brand]
+subgraph reciept[Kvittering - Statisk side]
+  20316 ==> |Gå til Return Url| DsSlut
 end
 
-subgraph reciept[Kvittering - Statisk side]
-  20315 --> |Gå til Brand| DS
+subgraph mitId[MitID]
+  LogInMitID[Log ind med MitID]
 end
 
 subgraph recieptError[Kvittering fejlside - Statisk side]
   20315 --> |Nulstil adgangskode| ResetPassword
-  20316 ==> DS
+  20315 --> |Fortsæt til Brand| DsSlut
 end
 
 subgraph Start[Start - Statisk side i Sitecore]
   20304[IU-20304: Start oprettelse]
 end
 
+DliOrDloStart[DLI eller DLO side] ==> |Opret konto| 20304
+  
 subgraph flow[Oprettelsesflow - ReactJS]
   20305[IU-20305: Afbryd oprettelse]
   20306[IU-20306: Kontaktinformation]
@@ -53,14 +56,13 @@ subgraph flow[Oprettelsesflow - ReactJS]
   20314[IU-20314: Bekræft med MitID]
   20315[IU-20315: Eksisterende bruger besked]
   20316[IU-20316: Ny bruger besked]
-  LogInMitID[Log ind med MitID]
   
-  DS ==> |Opret konto| 20304
+  20304 ==> |Kom i gang| 20306
+  
   20304 <--> |Afbryd| 20305
-  20305 --> |Ja, annuller og luk| DS
+  20305 --> |Ja, annuller og luk| DsSlut
   
   20306 -.-> |Tilbage| 20304
-  20304 ==> |Kom i gang| 20306
   
   20306 ==> |Fortsæt| ValidateEmail[(Validér email i PAM)]
   ValidateEmail ==> |Email findes ikke i PAM| 20308
@@ -69,7 +71,7 @@ subgraph flow[Oprettelsesflow - ReactJS]
   20306 <--> |Afbryd| 20305
   
   20307 -.-> |Tilbage| 20306
-  20307 --> |Log ind med MitID| LogInMitID --> DS
+  20307 --> |Log ind med MitID| LogInMitID --> DsSlut
   20307 --> |Indtast ny mail| 20306
   
   20308 ==> |Fortsæt| 20309
